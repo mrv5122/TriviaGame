@@ -32,8 +32,15 @@ var questions = [
     },
 ];
 
+var wrongImages = [
+    "./assets/images/wrong-answer.gif"
+];
+var rightImages = [
+    ".assets/images/right-answer.gif"
+];
+
 //time for each question- 20 sec
-var counter = 30;
+var counter = 20;
 
 //holds the place of the current question on quiz
 var currentQuestion = 0;
@@ -63,7 +70,8 @@ function nextQuest() {
 function timeUp() {
     clearInterval(timer);
     wrongAnswers++;
-    nextQuest();
+    // preloadImage("wrong");
+    setTimeout(nextQuest, 3 *1000);
 }
 
 function countDown() {
@@ -78,7 +86,7 @@ function countDown() {
 
 //displaying questions and options on html
 function displayQuestion() {
-    counter = 30;
+    counter = 20;
     timer = setInterval(countDown, 1000);
     
     var question = questions[currentQuestion].question;
@@ -101,7 +109,6 @@ function displayChoices(choices) {
     return result;
 }
 //advance question, regardless of whether right or wrong choice
-
 $(document).on("click", ".choice", function(){
 
     clearInterval(timer);
@@ -111,16 +118,18 @@ $(document).on("click", ".choice", function(){
 
     if (rightAnswer === answerSelected) {
         correctAnswers++;
-        nextQuest();
-        console.log("wins:" +correctAnswers);
+        preloadImage("right");
+        setTimeout(nextQuest, 3 *1000);
+        console.log("wins:" + correctAnswers);
     } else {
         wrongAnswers++;
         console.log("losses: " + wrongAnswers);
-        nextQuest();
+        preloadImage("wrong");
+        setTimeout(nextQuest, 3 *1000);
     }
-    console.log("op", answerSelected);
+    console.log("User Chose:" + answerSelected);
 })
-
+//show score at end
 function displayScore() {
     var result = `
     <p>You got ${correctAnswers} question(s) right.</p>
@@ -130,9 +139,35 @@ function displayScore() {
 
     $("#game").html(result);
 };
-displayQuestion();
+//code for reset button to restart game
+$(document).on("click", "#reset", function() {
+    counter = 20;
+    currentQuestion = 0;
+    correctAnswers = 0;
+    wrongAnswers = 0;
+    timer = false;
+    displayQuestion();
+});
 
+$("#play").click(function() {
+    $("#play").remove();
+    $("#time").html(timer);
+    displayQuestion();
+});
 
-
-
-
+//display funny gif when right or wrong choice selected
+// function displayImage(images) {
+//     var random = Math.floor(Math.random() * images);
+//     var randomImage = images[random];
+//     return displayImage();
+// }
+function preloadImage(status) {
+    var correctAnswer = questions[currentQuestion].rightAnswer;
+    if (status === "right") {
+        $("#game").html(`
+        <p class="preload-image">Congrats! You chose the right answer!</p>
+        <p class="preload-image">Correct answer: <b>${correctAnswer}</b></p>`)} else {
+        $("#game").html(`
+        <p class="preload-image">You just took an L</p>
+        <p class="preload-image">Correct answer: <b>${correctAnswer}</b></p>`)}
+};
