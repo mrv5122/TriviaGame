@@ -46,10 +46,16 @@ var wrongAnswers = 0;
 
 var timer;
 
-//function to advance to the next question
+//function to advance to the next question once time is up
 function nextQuest() {
+    var isQuestOver = (questions.length -1) === currentQuestion;
+    if (isQuestOver) {
+        console.log("Game over!")
+    }
+    else {
     currentQuestion++;
     displayQuestion();
+    }
 }
 
 //countdown timer
@@ -93,7 +99,26 @@ function displayChoices(choices) {
 
     return result;
 }
+//advance question, regardless of whether right or wrong choice
 
+$(document).on("click", ".choice", function(){
+
+    clearInterval(timer);
+
+    var answerSelected = $(this).attr("data-answer");
+    var rightAnswer = questions[currentQuestion].rightAnswer;
+
+    if (rightAnswer === answerSelected) {
+        correctAnswers++;
+        nextQuest();
+        console.log("wins:" +correctAnswers);
+    } else {
+        wrongAnswers++;
+        console.log("losses: " + wrongAnswers);
+        nextQuest();
+    }
+    console.log("op", answerSelected);
+})
 displayQuestion();
 
 
