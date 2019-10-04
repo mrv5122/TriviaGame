@@ -36,7 +36,7 @@ var wrongImages = [
     "./assets/images/wrong-answer.gif"
 ];
 var rightImages = [
-    ".assets/images/right-answer.gif"
+    "./assets/images/right-answer.gif"
 ];
 
 //time for each question- 20 sec
@@ -70,7 +70,7 @@ function nextQuest() {
 function timeUp() {
     clearInterval(timer);
     wrongAnswers++;
-    // preloadImage("wrong");
+    preloadImage("wrong");
     setTimeout(nextQuest, 3 *1000);
 }
 
@@ -81,7 +81,6 @@ function countDown() {
         timeUp();
     }
 }
-
 
 
 //displaying questions and options on html
@@ -99,6 +98,7 @@ function displayQuestion() {
     console.log(choices);
 };
 
+
 function displayChoices(choices) {
     var result = "";
 
@@ -108,6 +108,8 @@ function displayChoices(choices) {
 
     return result;
 }
+
+
 //advance question, regardless of whether right or wrong choice
 $(document).on("click", ".choice", function(){
 
@@ -156,18 +158,16 @@ $("#play").click(function() {
 });
 
 //display funny gif when right or wrong choice selected
-// function displayImage(images) {
-//     var random = Math.floor(Math.random() * images);
-//     var randomImage = images[random];
-//     return displayImage();
-// }
 function preloadImage(status) {
     var correctAnswer = questions[currentQuestion].rightAnswer;
     if (status === "right") {
         $("#game").html(`
         <p class="preload-image">Congrats! You chose the right answer!</p>
-        <p class="preload-image">Correct answer: <b>${correctAnswer}</b></p>`)} else {
+        <p class="preload-image">Correct answer: <b>${correctAnswer}</b></p>
+        <img src="${rightImages}"/>`)} 
+    else {
         $("#game").html(`
         <p class="preload-image">You just took an L</p>
-        <p class="preload-image">Correct answer: <b>${correctAnswer}</b></p>`)}
+        <p class="preload-image">Correct answer: <b>${correctAnswer}</b></p>
+        <img src="${wrongImages}"/>`)}
 };
