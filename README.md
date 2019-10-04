@@ -19,8 +19,8 @@ JavaScript Homework #2
 
 https://www.youtube.com/watch?v=BW3SQGF0AAw
 
-> Many thanks to YouTuber Esterling Accime
-> Also thanks to my TA Erin for helping to fix a bug where answers did not display properly
+> Many thanks to YouTuber Esterling Accime.
+> Also thanks to my TA Erin for helping to fix a bug where answers did not display properly.
 
 ---------
 This code is maintained by GitHub user mrv5122
