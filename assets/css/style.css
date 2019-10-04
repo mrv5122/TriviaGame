@@ -7,6 +7,9 @@ h1 {
 ol {
     text-align: center;
 }
-/* button {
-
-} */
+.choice {
+    border: 2px solid blueviolet;
+    padding: 9px;
+    border-radius: 4px;
+    cursor: pointer;
+}

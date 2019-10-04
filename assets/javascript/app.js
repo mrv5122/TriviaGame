@@ -33,7 +33,7 @@ var questions = [
 ];
 
 //time for each question- 20 sec
-var countDown = 20;
+var counter = 30;
 
 //holds the place of the current question on quiz
 var currentQuestion = 0;
@@ -46,79 +46,57 @@ var wrongAnswers = 0;
 
 var timer;
 
+//function to advance to the next question
+function nextQuest() {
+    currentQuestion++;
+    displayQuestion();
+}
+
+//countdown timer
+function timeUp() {
+    clearInterval(timer);
+    wrongAnswers++;
+    nextQuest();
+}
+
+function countDown() {
+    counter--;
+    $("#timer").html("Time Remaining: " + counter);
+    if (counter === 0) {
+        timeUp();
+    }
+}
+
+
+
 //displaying questions and options on html
 function displayQuestion() {
+    counter = 30;
+    timer = setInterval(countDown, 1000);
+    
     var question = questions[currentQuestion].question;
     var choices = questions[currentQuestion].choices;
  
-    $("#timer").html("Time Remaining: " + countDown);
-    $("#game").html("<h4>" + question + "</h4>" +
-    "<p class='choice' data-answer='$(choices[i])'>" + displayChoices(choices) + "</p>");
+    $("#timer").html("Time Remaining: " + counter);
+    $("#game").html(`<h4> ${question}</h4> 
+    <p class='choice' data-answer='${choices}'>${displayChoices(choices)}</p>`);
+
     console.log(choices);
 };
 
 function displayChoices(choices) {
-    var answer = "";
+    var result = "";
 
     for (var i = 0; i < choices.length; i++) {
-        answer += "<p class='choice' data-answer='$(choices[i])'>" + $(choices[i]) + "</p>";
+        result += `<p class='choice' data-answer='${choices[i]}'> ${choices[i]}</p>`;
     }
 
-    return answer;
+    return result;
 }
 
 displayQuestion();
 
-// window.onload = function () {
-//     $("#play").on("click", startGame);
-// };
 
-
-// var countDown
-// var intervalId;
-
-// var clockRunning = false;
-
-// var time = 1000 * 120;
-
-// function startGame() {
-//     if (!clockRunning) {
-        
-//         intervalId = setTimeout(countDown);
-        
-//         clockRunning = true;
-       
-//         //alert at 30 sec
-//         setTimeout(thirtySeconds, 1000 * 90);
-
-//         //alert at 1 min
-//         setTimeout(oneMinute, 1000 * 60);
-
-//         //alert user at end of time
-//         setTimeout(timeUp, 1000 * 120);
-
-//         //timeout functions defined
-//         function thirtySeconds() {
-//             $("#time-remaining").append("<h2>30 seconds remaining!</h2>");
-//             console.log("30 seconds left")
-//         }
-
-//         function oneMinute() {
-//             $("#time-remaining").append("<h2>1 minute remaining!</h2>");
-//             console.log("1 minute left")
-//         }
-
-//         function timeUp() {
-//             console.log("timer done");
-//             $("#time-remaining").append("<h2>Time is up!</h2>");
-//             alert("Time is up!");
-//         }
-//     }
-// }
-// //var holding the setInterval that runs timer
-
-// //prevents clock from speeding up unnecessarily
-// var clockRunning = false;
 
 
 
