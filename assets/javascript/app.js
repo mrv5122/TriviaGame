@@ -52,13 +52,16 @@ function displayQuestion() {
     var choices = questions[currentQuestion].choices;
  
     $("#timer").html("Time Remaining: " + countDown);
-    $("#game").html("<h4>" + question + "</h4>")
+    $("#game").html("<h4>" + question + "</h4>" +
+    "<p class='choice' data-answer='$(choices[i])'>" + displayChoices(choices) + "</p>");
+    console.log(choices);
 };
 
-function displayChoices() {
+function displayChoices(choices) {
     var answer = "";
-    for (let i=0; i < choices.length; i++) {
-        answer += '<p class="choice" data-answer></p>';
+
+    for (var i = 0; i < choices.length; i++) {
+        answer += "<p class='choice' data-answer='$(choices[i])'>" + $(choices[i]) + "</p>";
     }
 
     return answer;
