@@ -3,36 +3,68 @@ var questions = [
     {
         question: "What is the Capital of Canada?",
         choices: ["Quebec", "Montreal", "Toronto", "Ottawa"],
-        rightAnswer: choices[3],
+        rightAnswer: "Ottawa",
     },
     {
         question: "What is the capital of France?",
         choices: ["Paris", "Arles", "Limoges", "Avignon"],
-        rightAnswer: choices[0],
+        rightAnswer: "Paris",
     },
     {
         question: "What is the capital of Peru?",
         choices: ["Pisco", "Tacna", "Lima", "Cusco"],
-        rightAnswer: choices[2],
+        rightAnswer: "Lima",
     },
     {
         question: "What is the capital of China?",
         choices: ["Beijing", "Shanghai", "Hong Kong", "Xi'an"],
-        rightAnswer: choices[0],
+        rightAnswer: "Beijing",
     },
     {
         question: "What is the capital of Russia?",
         choices: ["Saint Petersburg", "Moscow", "Kazan", "Sochi"],
-        rightAnswer: choices[1],
+        rightAnswer: "Moscow",
     },
     {
         question: "What is the capital of Lithuania?",
         choices: ["Riga", "Vilnius", "Palanga", "Trakai"],
-        rightAnswer: choices[1],
+        rightAnswer: "Vilnius",
     },
 ];
 
-console.log(question);
+//time for each question- 20 sec
+var countDown = 20;
+
+//holds the place of the current question on quiz
+var currentQuestion = 0;
+
+//number of correct answers
+var correctAnswers = 0;
+
+//number of incorrect answers
+var wrongAnswers = 0;
+
+var timer;
+
+//displaying questions and options on html
+function displayQuestion() {
+    var question = questions[currentQuestion].question;
+    var choices = questions[currentQuestion].choices;
+ 
+    $("#timer").html("Time Remaining: " + countDown);
+    $("#game").html("<h4>" + question + "</h4>")
+};
+
+function displayChoices() {
+    var answer = "";
+    for (let i=0; i < choices.length; i++) {
+        answer += '<p class="choice" data-answer></p>';
+    }
+
+    return answer;
+}
+
+displayQuestion();
 
 // window.onload = function () {
 //     $("#play").on("click", startGame);
