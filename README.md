@@ -6,7 +6,7 @@ JavaScript Homework #2
 
 --------
 
-> this project was useful for practicing the implementation of jQuery and javascript to a websites.
+> this project was useful for practicing the implementation of jQuery and javascript onto websites.
 > it was also useful for learning how to properly implement if/else statements to avoid redundancies in code.
 
 --------
