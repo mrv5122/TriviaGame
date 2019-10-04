@@ -51,6 +51,7 @@ function nextQuest() {
     var isQuestOver = (questions.length -1) === currentQuestion;
     if (isQuestOver) {
         console.log("Game over!")
+        displayScore();
     }
     else {
     currentQuestion++;
@@ -119,6 +120,16 @@ $(document).on("click", ".choice", function(){
     }
     console.log("op", answerSelected);
 })
+
+function displayScore() {
+    var result = `
+    <p>You got ${correctAnswers} question(s) right.</p>
+    <p>You got ${wrongAnswers} question(s) wrong.</p>
+    <p>Total score: ${correctAnswers}/${questions.length} question(s) correct</p>
+    <button class="btn btn-primary" id="reset">Try Again</button>`;
+
+    $("#game").html(result);
+};
 displayQuestion();
 
 
