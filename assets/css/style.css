@@ -12,3 +12,16 @@ ol {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.container {
+    padding: 20px;
+}
+
+.jumbotron {
+    margin-top: 2%;
+    text-align: center;
+}
+
+body {
+    height: 97vh;
+}

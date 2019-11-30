@@ -100,6 +100,7 @@ function displayQuestion() {
 
 
 function displayChoices(choices) {
+   
     var result = "";
 
     for (var i = 0; i < choices.length; i++) {
@@ -151,11 +152,13 @@ $(document).on("click", "#reset", function() {
     displayQuestion();
 });
 
+
 $("#play").click(function() {
     $("#play").remove();
     $("#time").html(timer);
     displayQuestion();
 });
+
 
 //display funny gif when right or wrong choice selected
 function preloadImage(status) {
